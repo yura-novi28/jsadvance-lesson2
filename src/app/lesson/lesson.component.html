@@ -1,0 +1,41 @@
+<header class="header">
+    <h1 class="header__title">
+        Angular users task
+    </h1>
+</header>
+<main class="main">
+    <div class="container">
+        <div class="block-left">
+            <form class="form-left">
+                <p class="form-left__text">Login</p>
+                <input name="Login" [(ngModel)]="nameForm" placeholder="Enter login" type="text" class="form-left__input-txt">
+                <p class="form-left__text">Password</p>
+                <input name="Password" [(ngModel)]="passwordForm" placeholder="Enter password" type="password" class="form-left__input-txt">
+                <p class="form-left__text">Email address</p>
+                <input name="Email" [(ngModel)]="emailForm" placeholder="Enter email" type="email" class="form-left__input-txt">
+                <input *ngIf="checkButtonBoolean" [disabled]="nameForm == '' || passwordForm == '' || emailForm == ''" (click)="addUser()" value="Add user" type="button" class="form-left__input-btn">
+                <input *ngIf="!checkButtonBoolean" [disabled]="nameForm == '' || passwordForm == '' || emailForm == ''" (click)="saveEditUser()" value="Save edit user" type="button" class="form-left__input-btn form-left__input-btn--color">
+            </form>
+        </div>
+        <div class="block-rigth">
+            <div class="rigth-header">
+                <p class="rigth-header__text">#</p>
+                <p class="rigth-header__text">Login</p>
+                <p class="rigth-header__text">Password</p>
+                <p class="rigth-header__text">Email</p>
+                <p class="rigth-header__text">Edit</p>
+                <p class="rigth-header__text">Delete</p>
+            </div>
+            <div class="rigth-footer-wrapper">
+                <div *ngFor="let item of arrValue;index as i" class="rigth-footer">
+                    <p class="rigth-footer__text">{{ i + 1}}</p>
+                    <p class="rigth-footer__text">{{ item.login }}</p>
+                    <p class="rigth-footer__text">{{ item.password }}</p>
+                    <p class="rigth-footer__text">{{ item.email }}</p>
+                    <input (click)="editUser(i)" value="Edit" type="button" class="rigth-footer__input-btn">
+                    <input [disabled]="checkButtonBooleanDelete" (click)="deleteUser(i)" value="Delete" type="button" class="rigth-footer__input-btn--red">
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
